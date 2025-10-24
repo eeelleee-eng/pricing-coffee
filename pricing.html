@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Coffee Pricing — Pick Your Brew</title>
+  <style>
+    body{font-family:Inter,system-ui;background:#fbf6f0;color:#3b2f2a;margin:0;padding:30px}
+    .card{max-width:600px;margin:auto;background:#fff6ec;padding:30px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
+    h1{margin-top:0;color:#c08b4b}
+    .price{font-size:32px;font-weight:700;margin:10px 0}
+    .btn{background:#c08b4b;color:white;padding:10px 18px;border:none;border-radius:8px;font-weight:600;cursor:pointer}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1 id="coffeeName">Your Coffee</h1>
+    <p id="coffeeDesc"></p>
+    <div class="price" id="coffeePrice"></div>
+    <button class="btn" onclick="alert('Thanks for your order! We’ll get your brew ready.')">Order Now</button>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    const desc = params.get('desc');
+    document.getElementById('coffeeName').textContent = name || 'Custom Coffee';
+    document.getElementById('coffeeDesc').textContent = desc || '';
+
+    const prices = {
+      cappuccino: 180,
+      latte: 160,
+      americano: 140,
+      filter: 120,
+      dalgona: 130,
+      icedlatte: 170,
+      custom: 150
+    };
+
+    const price = prices[params.get('id')] || 150;
+    document.getElementById('coffeePrice').textContent = `₱${price.toFixed(2)}`;
+  </script>
+</body>
+</html>
